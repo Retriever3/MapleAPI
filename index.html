@@ -22,13 +22,24 @@
         <p id="imageContainer"></p>
     </div>
     
-    <h1 id="characterName">캐릭터 이름: </h1>
+    <div id="characterName">캐릭터 이름:</div>
+    <div id="characterServer">서버:</div>
+    <div id="characterGuild">길 드:</div>
+    <div id="characterLv">레 벨:</div>
     <div id="popularityContainer">인기도:</div>
-    <div id="fightingPower">전투력:</div>
+
+    <div class="stat-table" id="statsTable">
+        <!-- 동적으로 생성될 부분 -->
+    </div>
+
+    
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous">
     </script>
     <script src="main.js"></script>
+    <script src="button.js"></script>
+    <script src="apiKey.js"></script>
+
     <style>
         header {
             background-color: rgb(33, 34, 39);
@@ -89,6 +100,36 @@
             border: 5px solid #4CAF50;
             border-radius: 10px;
         }
+
+        .stat-table {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .stat-name,
+        .stat-value {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-name {
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .stat-row:last-child {
+            margin-bottom: 0;
+        }
+
     </style>
 </body>
 

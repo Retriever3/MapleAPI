@@ -1,23 +1,6 @@
 // main.js 파일
 
-const API_KEY = "test_f84f04936432db0f50d3656d41bf2376619302663173075f7b4f33509f6ac137105a6a552d26310a58df204f28cbd254";
-
-$(document).ready(() => {
-    $("#search").keypress((e) => {
-        if (e.which === 13) {
-            $("#searchBt").click();
-        }
-    });
-
-    $("#searchBt").click(async () => {
-        const characterName = $("#search").val();
-        if (!characterName) {
-            alert("캐릭터 이름을 입력하세요.");
-        } else {
-            await fetchData(characterName);
-        }
-    });
-});
+// const API_KEY = "test_f84f04936432db0f50d3656d41bf2376619302663173075f7b4f33509f6ac137105a6a552d26310a58df204f28cbd254";
 
 async function fetchData(characterName) {
     try {
@@ -59,11 +42,20 @@ async function fetchData(characterName) {
                 const userBasicInfo = await userBasicInfoResponse.json();
                 console.log("유저 기본 정보:", userBasicInfo);
 
-                // 이미지와 이름을 화면에 표시
+                // userBasic 정보를 화면에 표시
                 const characterImageURL = userBasicInfo.character_image;
                 const characterNameElement = document.getElementById("characterName");
                 characterNameElement.textContent = "캐릭터 이름: " + userBasicInfo.character_name;
-
+                
+                const characterServerElement = document.getElementById("characterServer");
+                characterServerElement.textContent = "서 버: " + userBasicInfo.world_name;
+                
+                const characterGuildElement = document.getElementById("characterGuild");
+                characterGuildElement.textContent = "길 드: " + userBasicInfo.character_guild_name;
+        
+                const characterLvElement = document.getElementById("characterLv");
+                characterLvElement.textContent = "레 벨: " + userBasicInfo.character_level;
+        
                 const imageContainer = document.getElementById("imageContainer");
                 imageContainer.innerHTML = `<img src="${characterImageURL}" alt="Character Image">`;
 
@@ -81,7 +73,7 @@ async function fetchData(characterName) {
                 popElement.textContent = "인기도 : " + userPop.popularity;
 
 
-                //전투력 가져오기
+                //종합 능력치 가져오기
                 const userStateResponse = await fetch(`https://open.api.nexon.com/maplestory/v1/character/stat?ocid=${userCodeData.ocid}&date=${formattedDate}`, {
                     headers: {
                         "x-nxopen-api-key": API_KEY
@@ -90,6 +82,37 @@ async function fetchData(characterName) {
                 const userState = await userStateResponse.json();
                 console.log("종합 능력치: ",userState);
 
+                // API에서 가져온 종합 능력치 데이터 예시
+                const userStat = {
+                   final_stat: [
+                        { stat_name: '최소 스탯공격력', stat_value: '29657326' },
+                        { stat_name: '최대 스탯공격력', stat_value: '34890969' },
+                        // ... 기타 데이터 ...
+                    ],
+                };
+
+                // 동적으로 스탯 테이블 생성
+                const statsTable = document.getElementById('statsTable');
+
+                userStat.final_stat.forEach((statData) => {
+                const statRow = document.createElement('div');
+                statRow.classList.add('stat-row');
+
+                const statName = document.createElement('div');
+                statName.classList.add('stat-name');
+                statName.textContent = statData.stat_name;
+
+                const statValue = document.createElement('div');
+                statValue.classList.add('stat-value');
+                statValue.textContent = statData.stat_value;
+
+                statRow.appendChild(statName);
+                statRow.appendChild(statValue);
+
+                statsTable.appendChild(statRow);
+                }); 
+        
+        
                 //능력치 표시
                 const stateElement = document.getElementById("fightingPower");
                 stateElement.textContent = "전투력 : " + userState.final_stat[42].stat_value;
