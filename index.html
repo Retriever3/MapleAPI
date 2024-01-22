@@ -10,6 +10,7 @@
 <body>
     <header>
         <h1 class="left-section">api 연습</h1>
+   
         <div class="right-section">
             <input type="text" id="search" placeholder="캐릭터 이름을 입력하세요" />
             <button id="searchBt">검색</button>
@@ -22,7 +23,7 @@
         <p id="imageContainer"></p>
     </div>
     
-    <div id="characterName">캐릭터 이름:</div>
+    <div id="characterName"></div>
     <div id="characterServer">서버:</div>
     <div id="characterGuild">길 드:</div>
     <div id="characterLv">레 벨:</div>
@@ -67,6 +68,17 @@
             margin: 0;
             padding: 0;
         }
+        a  {
+            font-family: Pretendard, -apple-system, Segoe UI, Roboto, Helvetica Neue, "sans-serif";
+            text-align: left;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 100%;
+            color: #fff;
+            margin: 0;
+            padding-right: 100px;
+            padding-left: 30px;
+        }
 
          #search {
             padding: 10px;
@@ -92,7 +104,7 @@
         }
         #imageBack{
             image-orientation: flip;
-            background-image: url(back.jpg);
+            background-image: url(imageFile/back.jpg);
         }
 
         #imageContainer img {

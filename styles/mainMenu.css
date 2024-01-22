@@ -1,0 +1,35 @@
+.mainMenu {
+    display: inline-flex;
+    
+
+    align-items: center;
+    height: 100vh;
+    background-color: #2b666a;
+}
+
+.imageBack {
+    text-align: center;
+}
+
+#imageContainer img {
+    max-width: 200px;
+    border: 5px solid #000000;
+    border-radius: 10px;
+}
+
+.characterInfo {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#characterName {
+    font-size: 24px;
+    /* 원하는 크기로 조절 */
+    font-weight: bold;
+}
+
+#characterLv,
+#characterGuild,
+#popularityContainer {
+    margin-top: 10px;
+}
